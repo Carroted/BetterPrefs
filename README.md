@@ -13,7 +13,7 @@ License: [MIT](https://opensource.org/licenses/MIT)
 - **Cross-platform**: Save data can be saved to a file on the desktop, and loaded from a file on Android, etc. All platforms Unity supports can read the files in the same way.
 - **Data types**: BetterPrefs supports more data types than Unity's PlayerPrefs, such as booleans, Vector2s and Vector3s.
 - **Open source**: The source code is public, unlike Unity's PlayerPrefs.
-- **More to come**: More features are coming soon, such as support for custom data types, custom serialization, and more.
+- **More to come**: More features are coming soon
 
 ## Getting Started
 
