@@ -2,6 +2,8 @@
 
 BetterPrefs is a replacement for Unity's PlayerPrefs that aims to add features that PlayerPrefs is lacking, such as support for multiple saves, save import/export and even more data types, such as booleans, Vector2s and Vector3s.
 
+BetterPrefs is designed to be similar to PlayerPrefs, so switching is super easy.
+
 License: [MIT](https://opensource.org/licenses/MIT)
 
 ## Features
@@ -17,7 +19,7 @@ License: [MIT](https://opensource.org/licenses/MIT)
 
 To start using BetterPrefs, you need to add the [BetterPrefs.cs](https://github.com/Carroted/BetterPrefs/blob/master/BetterPrefs.cs) script to your Unity project.
 
-Once you'v added the script, you can use the BetterPrefs class to access your save data.
+Once you've added the script, you can use the BetterPrefs class to access your save data.
 
 ```csharp
 BetterPrefs.Load(); // Loads the save data from the default save file, stored in Application.persistentDataPath + "/saves/game.sav" (can be changed in the script)
@@ -38,6 +40,36 @@ Unlike PlayerPrefs, BetterPrefs lets you easily choose which save file to load a
 In the above example, we even create a backup of the data, so that if something goes wrong, we can still load the data we saved before.
 
 BetterPrefs doesn't automatically save the data on quit due to Unity limitations (scripts that don't derive from MonoBehaviour can't access Unity's [OnApplicationQuit](https://docs.unity3d.com/ScriptReference/MonoBehaviour.OnApplicationQuit.html) event).
+
+## Migration from PlayerPrefs
+
+If your Unity project currently uses PlayerPrefs, switching should be easy.
+
+First, follow the instructions in [Getting Started](#getting-started).
+
+You should now create a script, or add to an existing script, that calls the BetterPrefs.Load method.
+
+If you don't want to have a UI to manage saves in your game, you'll probably want to call BetterPrefs.Load on Awake if you want to be able to access data in Start.
+
+```csharp
+using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+
+public class ExampleSaveLoader : MonoBehaviour
+{
+    void Awake()
+    {
+        BetterPrefs.Load(); // You can specify a path if you want, or even c
+    }
+}
+```
+
+Then, you can use the BetterPrefs class to access your save data.
+
+If you do want to have a UI to manage saves in your game, you should make sure your code doesn't try to access data before the BetterPrefs.Load method has been called.
+
+You can get a list of saves by listing files in the saves directory, which, by default, is `Application.persistentDataPath + "/saves"`, and then add a list of save options the user can choose from, and call BetterPrefs.Load on the chosen save.
 
 ## Methods
 
