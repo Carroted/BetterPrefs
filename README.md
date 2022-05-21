@@ -13,7 +13,7 @@ License: [MIT](https://opensource.org/licenses/MIT)
 - **Cross-platform**: Save data can be saved to a file on the desktop, and loaded from a file on Android, etc. All platforms Unity supports can read the files in the same way.
 - **Data types**: BetterPrefs supports more data types than Unity's PlayerPrefs, such as booleans, Vector2s and Vector3s.
 - **Open source**: The source code is public, unlike Unity's PlayerPrefs.
-- **More to come**: More features are coming soon
+- **More to come**: More features are coming soon, like importing old PlayerPrefs saves and converting them to BetterPrefs
 
 ## Getting Started
 
@@ -71,6 +71,10 @@ If you do want to have a UI to manage saves in your game, you should make sure y
 
 You can get a list of saves by listing files in the saves directory, which, by default, is `Application.persistentDataPath + "/saves"`, and then add a list of save options the user can choose from, and call BetterPrefs.Load on the chosen save.
 
+Once your save manager is done and ready, you might be able to simply do a find and replace on your scripts from `PlayerPrefs` to `BetterPrefs`. (can be done easily in most IDEs). **MAKE SURE TO HAVE A BACKUP BEFORE DOING THIS!**
+
+It's also worth noting that old PlayerPrefs saves currently aren't supported, and if many people already have your game and have saves in it, those saves will be lost. This should only be an issue before release.
+
 ## Methods
 
 - **BetterPrefs.Load()**: Loads the save data from the default save file.
@@ -100,6 +104,8 @@ You can get a list of saves by listing files in the saves directory, which, by d
 - Can't save on quit (can be done by a MonoBehaviour script, which should be better anyway, since it gives you more control over which save file to save and when)
 - Escaped newlines (`\\n`) are turned into actual newlines (`\n`) when loading and saving, which can cause issues if you're trying to store \n and not an actual newline character.
 - Needs a "split char" between type, key and value in the saves, which is automatically changed to a space when you try to use it in a string (`BetterPrefs.SetString`)
+- Saves aren't serialized, cheating is easy
+- PlayerPrefs saves can't be imported yet (that's being worked on)
 
 ## About
 
