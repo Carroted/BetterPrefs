@@ -9,7 +9,7 @@ License: [MIT](https://opensource.org/licenses/MIT)
 ## Features
 
 - **Multiple saves**: Save data can be saved to multiple files, and the user can switch between them.
-- **Serialization**: Saves are serialized, which makes them harder to edit (PlayerPrefs usually stores them in plain-text or in registry, making them super easy to edit and to cheat)
+- **Serialization**: Saves are serialized, which makes them harder to edit (PlayerPrefs usually stores them in plain-text or in registry, making them super easy to edit and to cheat) ([more info](#serialization)
 - **Save import/export**: Save data can be imported and exported, which is very useful for sharing save data between different devices.
 - **Cross-platform**: Save data can be saved to a file on the desktop, and loaded from a file on Android, etc. All platforms Unity supports can read the files in the same way.
 - **Data types**: BetterPrefs supports more data types than Unity's PlayerPrefs, such as booleans, Vector2s and Vector3s.
@@ -100,9 +100,13 @@ It's also worth noting that old PlayerPrefs saves currently aren't supported, an
 - **BetterPrefs.GetDate(string path)**: Gets the `DateTime` of when the specified save file was saved.
 - **BetterPrefs.HasKey(string key)**: Checks if the specified key exists.
 
+## Serialization
+
+Saves are serialized using `System.Runtime.Serialization.Formatters.Binary`'s `BinaryFormatter`.
+
 ## Known Limitations
 
-- PlayerPrefs saves can't be imported yet (that's being worked on)
+- PlayerPrefs saves can't be imported
 
 ## About
 
