@@ -312,7 +312,7 @@ public static class BetterPrefs
         dataArray[data.Count, 1] = "date";
         dataArray[data.Count, 2] = totalSecs.ToString();
 
-        SetFloat("date", totalSecs); // Set the date key to the current time now that we know at what time the save was made
+        SetFloat("date", (float)totalSecs); // Set the date key to the current time now that we know at what time the save was made
 
         // Save the data to the file
 
