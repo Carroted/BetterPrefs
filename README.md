@@ -78,29 +78,40 @@ Once your save manager is done and ready, you might be able to simply do a find 
 
 It's also worth noting that old PlayerPrefs saves currently aren't supported, and if many people already have your game and have saves in it, those saves will be lost. This should only be an issue before release.
 
-## Methods
+## Reference
 
-- **BetterPrefs.Load()**: Loads the save data from the default save file.
-- **BetterPrefs.Load(string path)**: Loads the save data from the specified file.
-- **BetterPrefs.Save()**: Saves the save data into the save that was Loaded.
-- **BetterPrefs.Save(string path)**: Saves the data to the specified file.
-- **BetterPrefs.SetBool(string key, bool value)**: Sets the value of the specified key to the specified boolean value.
-- **BetterPrefs.SetInt(string key, int value)**: Sets the value of the specified key to the specified integer value.
-- **BetterPrefs.SetFloat(string key, float value)**: Sets the value of the specified key to the specified float value.
-- **BetterPrefs.SetString(string key, string value)**: Sets the value of the specified key to the specified string value.
-- **BetterPrefs.SetVector2(string key, Vector2 value)**: Sets the value of the specified key to the specified Vector2 value.
-- **BetterPrefs.SetVector3(string key, Vector3 value)**: Sets the value of the specified key to the specified Vector3 value.
-- **BetterPrefs.GetBool(string key)**: Gets the value of the specified key as a boolean.
-- **BetterPrefs.GetInt(string key)**: Gets the value of the specified key as an integer.
-- **BetterPrefs.GetFloat(string key)**: Gets the value of the specified key as a float.
-- **BetterPrefs.GetString(string key)**: Gets the value of the specified key as a string.
-- **BetterPrefs.GetVector2(string key)**: Gets the value of the specified key as a Vector2.
-- **BetterPrefs.GetVector3(string key)**: Gets the value of the specified key as a Vector3.
-- **BetterPrefs.DeleteKey(string key)**: Deletes the specified key.
-- **BetterPrefs.DeleteAll()**: Deletes all keys.
-- **BetterPrefs.GetDate()**: Gets the `DateTime` of the currently loaded save file, or the current date if the save hasn't been Saved yet.
-- **BetterPrefs.GetDate(string path)**: Gets the `DateTime` of when the specified save file was saved.
-- **BetterPrefs.HasKey(string key)**: Checks if the specified key exists.
+### Methods
+
+- `void` **BetterPrefs.Load()**: Loads the save data from the default save file.
+- `void` **BetterPrefs.Load(string path)**: Loads the save data from the specified file.
+- `string` **BetterPrefs.Save()**: Saves the save data into the save that was Loaded and returns the path where it saved.
+- `string` **BetterPrefs.Save(string path)**: Saves the data to the specified file and returns the path where it saved.
+- `void` **BetterPrefs.SetBool(string key, bool value)**: Sets the value of the specified key to the specified boolean value.
+- `void` **BetterPrefs.SetInt(string key, int value)**: Sets the value of the specified key to the specified integer value.
+- `void` **BetterPrefs.SetFloat(string key, float value)**: Sets the value of the specified key to the specified float value.
+- `void` **BetterPrefs.SetString(string key, string value)**: Sets the value of the specified key to the specified string value.
+- `void` **BetterPrefs.SetVector2(string key, Vector2 value)**: Sets the value of the specified key to the specified Vector2 value.
+- `void` **BetterPrefs.SetVector3(string key, Vector3 value)**: Sets the value of the specified key to the specified Vector3 value.
+- `bool` **BetterPrefs.GetBool(string key)**: Gets the value of the specified key as a boolean.
+- `int` **BetterPrefs.GetInt(string key)**: Gets the value of the specified key as an integer.
+- `float` **BetterPrefs.GetFloat(string key)**: Gets the value of the specified key as a float.
+- `string` **BetterPrefs.GetString(string key)**: Gets the value of the specified key as a string.
+- `Vector2` **BetterPrefs.GetVector2(string key)**: Gets the value of the specified key as a Vector2.
+- `Vector3` **BetterPrefs.GetVector3(string key)**: Gets the value of the specified key as a Vector3.
+- `void` **BetterPrefs.DeleteKey(string key)**: Deletes the specified key.
+- `void` **BetterPrefs.DeleteAll()**: Deletes all keys.
+- `DateTime` **BetterPrefs.GetDate()**: Gets the `DateTime` of the currently loaded save file, or the current date if the save hasn't been Saved yet.
+- `DateTime` **BetterPrefs.GetDate(string path)**: Gets the `DateTime` of when the specified save file was saved.
+- `bool` **BetterPrefs.HasKey(string key)**: Checks if the specified key exists.
+- `int` **BetterPrefs.GetCount()**: Get how many keys there are in the data
+- `Dictionary<string,object>` **BetterPrefs.GetData()**: Get the currently loaded save data
+
+### Variables
+- `string` **saveLocation**: Where saves are stored by default (overriden with a path argument to `Load` and `Save`)
+- `string` **saveExtension**: Default file extension for saves (overriden with a path argument to `Load` and `Save`)
+- `string` **currentSave**: Path to the currently loaded save, or null if none is loaded.
+
+There is also a `Dictionary<string,object>` named **data** in BetterPrefs, but it should only ever be modified with the above methods.
 
 ## Serialization
 
