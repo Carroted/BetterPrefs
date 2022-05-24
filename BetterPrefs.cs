@@ -766,7 +766,7 @@ public static class BetterPrefs
         if (data == null)
         {
             Debug.LogError("BetterPrefs: No save is loaded, but you are trying to access it");
-            return;
+            return new Dictionary<string, object>();
         }
 
          return data;
