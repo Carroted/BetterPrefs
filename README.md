@@ -4,7 +4,7 @@ BetterPrefs is both a replacement for Unity's PlayerPrefs with features that Pla
 
 It is a great, versatile, universal system for any kind of save data, be it progress, settings, creations, you name it.
 
-BetterPrefs is designed to be similar to PlayerPrefs, so switching is super easy.
+BetterPrefs is designed to be similar to PlayerPrefs, so switching over is super easy, barely an inconvenience.
 
 License: [MIT](https://opensource.org/licenses/MIT)
 
@@ -99,6 +99,14 @@ It's also worth noting that old PlayerPrefs saves currently aren't supported, an
 - `string` **BetterPrefs.GetString(string key)**: Gets the value of the specified key as a string.
 - `Vector2` **BetterPrefs.GetVector2(string key)**: Gets the value of the specified key as a Vector2.
 - `Vector3` **BetterPrefs.GetVector3(string key)**: Gets the value of the specified key as a Vector3.
+
+- `bool` **BetterPrefs.GetBool(string key, bool fallback)**: Gets the value of the specified key as a boolean, or the fallback if the key doesn't exist.
+- `int` **BetterPrefs.GetInt(string key, int fallback)**: Gets the value of the specified key as an integer, or the fallback if the key doesn't exist.
+- `float` **BetterPrefs.GetFloat(string key, float fallback)**: Gets the value of the specified key as a float, or the fallback if the key doesn't exist.
+- `string` **BetterPrefs.GetString(string key, string fallback)**: Gets the value of the specified key as a string, or the fallback if the key doesn't exist.
+- `Vector2` **BetterPrefs.GetVector2(string key, Vector2 fallback)**: Gets the value of the specified key as a Vector2, or the fallback if the key doesn't exist.
+- `Vector3` **BetterPrefs.GetVector3(string key, Vector3 fallback)**: Gets the value of the specified key as a Vector3, or the fallback if the key doesn't exist.
+
 - `void` **BetterPrefs.DeleteKey(string key)**: Deletes the specified key.
 - `void` **BetterPrefs.DeleteAll()**: Deletes all keys.
 - `DateTime` **BetterPrefs.GetDate()**: Gets the `DateTime` of the currently loaded save file, or the current date if the save hasn't been Saved yet.
