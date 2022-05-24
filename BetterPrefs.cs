@@ -70,7 +70,7 @@ public static class BetterPrefs
             Debug.LogError("BetterPrefs: No save is loaded, but you are trying to access it");
             return;
         }
-        data[key] = value.Replace("\n", "\\n");
+        data[key] = value;
     }
 
     public static void SetVector2(string key, Vector2 value)
@@ -92,6 +92,164 @@ public static class BetterPrefs
         }
         data[key] = value;
     }
+
+    public static bool GetBool(string key, bool fallback)
+    {
+        if (data == null)
+        {
+            Debug.LogError("BetterPrefs: No save is loaded, but you are trying to access it");
+            return false;
+        }
+
+        if (data.ContainsKey(key))
+        {
+            return (bool)data[key];
+        }
+        else
+        {
+            if (fallback == null)
+            {
+                Debug.LogError("BetterPrefs: Key " + key + " does not exist. You should always use BetterPrefs.HasKey to check if a key exists before trying to access it.");
+                return false;
+            }
+            else
+            {
+                return fallback;
+            }
+        }
+    }
+
+    public static int GetInt(string key, int fallback)
+    {
+        if (data == null)
+        {
+            Debug.LogError("BetterPrefs: No save is loaded, but you are trying to access it");
+            return -1;
+        }
+
+        if (data.ContainsKey(key))
+        {
+            return (int)data[key];
+        }
+        else
+        {
+            if (fallback == null)
+            {
+                Debug.LogError("BetterPrefs: Key " + key + " does not exist. You should always use BetterPrefs.HasKey to check if a key exists before trying to access it.");
+                return -1;
+            }
+            else
+            {
+                return fallback;
+            }
+        }
+    }
+
+    public static float GetFloat(string key, float fallback)
+    {
+        if (data == null)
+        {
+            Debug.LogError("BetterPrefs: No save is loaded, but you are trying to access it");
+            return -1;
+        }
+
+        if (data.ContainsKey(key))
+        {
+            return (float)data[key];
+        }
+        else
+        {
+            if (fallback == null)
+            {
+                Debug.LogError("BetterPrefs: Key " + key + " does not exist. You should always use BetterPrefs.HasKey to check if a key exists before trying to access it.");
+                return -1;
+            }
+            else
+            {
+                return fallback;
+            }
+        }
+    }
+
+    public static string GetString(string key, string fallback)
+    {
+        if (data == null)
+        {
+            Debug.LogError("BetterPrefs: No save is loaded, but you are trying to access it");
+            return "";
+        }
+
+        if (data.ContainsKey(key))
+        {
+            return ((string)data[key]);
+        }
+        else
+        {
+            if (fallback == null)
+            {
+                Debug.LogError("BetterPrefs: Key " + key + " does not exist. You should always use BetterPrefs.HasKey to check if a key exists before trying to access it.");
+                return "";
+            }
+            else
+            {
+                return fallback;
+            }
+        }
+    }
+
+    public static Vector2 GetVector2(string key, Vector2 fallback)
+    {
+        if (data == null)
+        {
+            Debug.LogError("BetterPrefs: No save is loaded, but you are trying to access it");
+            return Vector2.zero;
+        }
+
+        if (data.ContainsKey(key))
+        {
+            return (Vector2)data[key];
+        }
+        else
+        {
+            if (fallback == null)
+            {
+                Debug.LogError("BetterPrefs: Key " + key + " does not exist. You should always use BetterPrefs.HasKey to check if a key exists before trying to access it.");
+                return Vector2.zero;
+            }
+            else
+            {
+                return fallback;
+            }
+        }
+    }
+
+    public static Vector3 GetVector3(string key, Vector3 fallback)
+    {
+        if (data == null)
+        {
+            Debug.LogError("BetterPrefs: No save is loaded, but you are trying to access it");
+            return Vector3.zero;
+        }
+
+        if (data.ContainsKey(key))
+        {
+            return (Vector3)data[key];
+        }
+        else
+        {
+            if (fallback == null)
+            {
+                Debug.LogError("BetterPrefs: Key " + key + " does not exist. You should always use BetterPrefs.HasKey to check if a key exists before trying to access it.");
+                return Vector3.zero;
+            }
+            else
+            {
+                return fallback;
+            }
+        }
+    }
+
+    // Get methods without fallback
 
     public static bool GetBool(string key)
     {
@@ -126,7 +284,7 @@ public static class BetterPrefs
         }
         else
         {
-            Debug.LogError("BetterPrefs: Key \"" + key + "\" does not exist. You should always use BetterPrefs.HasKey to check if a key exists before trying to access it.");
+            Debug.LogError("BetterPrefs: Key " + key + " does not exist. You should always use BetterPrefs.HasKey to check if a key exists before trying to access it.");
             return -1;
         }
     }
@@ -145,7 +303,7 @@ public static class BetterPrefs
         }
         else
         {
-            Debug.LogError("BetterPrefs: Key \"" + key + "\" does not exist. You should always use BetterPrefs.HasKey to check if a key exists before trying to access it.");
+            Debug.LogError("BetterPrefs: Key " + key + " does not exist. You should always use BetterPrefs.HasKey to check if a key exists before trying to access it.");
             return -1;
         }
     }
@@ -160,11 +318,11 @@ public static class BetterPrefs
 
         if (data.ContainsKey(key))
         {
-            return ((string)data[key]).Replace("\\n", "\n");
+            return ((string)data[key]);
         }
         else
         {
-            Debug.LogError("BetterPrefs: Key \"" + key + "\" does not exist. You should always use BetterPrefs.HasKey to check if a key exists before trying to access it.");
+            Debug.LogError("BetterPrefs: Key " + key + " does not exist. You should always use BetterPrefs.HasKey to check if a key exists before trying to access it.");
             return "";
         }
     }
@@ -183,7 +341,7 @@ public static class BetterPrefs
         }
         else
         {
-            Debug.LogError("BetterPrefs: Key \"" + key + "\" does not exist. You should always use BetterPrefs.HasKey to check if a key exists before trying to access it.");
+            Debug.LogError("BetterPrefs: Key " + key + " does not exist. You should always use BetterPrefs.HasKey to check if a key exists before trying to access it.");
             return Vector2.zero;
         }
     }
@@ -202,7 +360,7 @@ public static class BetterPrefs
         }
         else
         {
-            Debug.LogError("BetterPrefs: Key \"" + key + "\" does not exist. You should always use BetterPrefs.HasKey to check if a key exists before trying to access it.");
+            Debug.LogError("BetterPrefs: Key " + key + " does not exist. You should always use BetterPrefs.HasKey to check if a key exists before trying to access it.");
             return Vector3.zero;
         }
     }
