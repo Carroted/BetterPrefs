@@ -749,10 +749,10 @@ public static class BetterPrefs
             return DateTime.MinValue;
         }
     }
-    
+
     public static int GetCount() // Get how many keys are in the data
     {
-           if (data == null)
+        if (data == null)
         {
             Debug.LogError("BetterPrefs: No save is loaded, but you are trying to access it");
             return -1;
@@ -760,8 +760,8 @@ public static class BetterPrefs
 
         return data.Count;
     }
-    
-    public static Dictionary<string,object> GetData() // Get the data
+
+    public static Dictionary<string, object> GetData() // Get the data
     {
         if (data == null)
         {
@@ -769,6 +769,6 @@ public static class BetterPrefs
             return new Dictionary<string, object>();
         }
 
-         return data;
+        return data;
     }
 }
