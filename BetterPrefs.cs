@@ -749,4 +749,26 @@ public static class BetterPrefs
             return DateTime.MinValue;
         }
     }
+    
+    public static int GetCount() // Get how many keys are in the data
+    {
+           if (data == null)
+        {
+            Debug.LogError("BetterPrefs: No save is loaded, but you are trying to access it");
+            return -1;
+        }
+
+        return data.Count;
+    }
+    
+    public static Dictionary<string,object> GetData() // Get the data
+    {
+        if (data == null)
+        {
+            Debug.LogError("BetterPrefs: No save is loaded, but you are trying to access it");
+            return;
+        }
+
+         return data;
+    }
 }
