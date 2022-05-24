@@ -15,6 +15,7 @@ License: [MIT](https://opensource.org/licenses/MIT)
 - **Save import/export**: Save data can be imported and exported, which is very useful for sharing save data between different devices.
 - **Cross-platform**: Save data can be saved to a file on the desktop, and loaded from a file on Android, etc. All platforms Unity supports can read the files in the same way.
 - **Data types**: BetterPrefs supports more data types than Unity's PlayerPrefs, such as booleans, Vector2s and Vector3s.
+- **Data info**: Unlike PlayerPrefs, BetterPrefs lets you check how many keys you've stored, or get all your save data as a `Dictionary<string,object>`.
 - **Open source**: The source code is public, unlike Unity's PlayerPrefs.
 - **More to come**: More features are coming soon, like importing old PlayerPrefs saves and converting them to BetterPrefs
 
