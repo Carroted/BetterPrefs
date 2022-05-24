@@ -22,7 +22,7 @@ License: [MIT](https://opensource.org/licenses/MIT)
 
 To start using BetterPrefs, you need to add the [BetterPrefs.cs](https://github.com/Carroted/BetterPrefs/blob/master/BetterPrefs.cs) script to your Unity project.
 
-Once you've added the script, you can use the BetterPrefs class to access your save data.
+Once you've added the script, you can use the BetterPrefs class to access your save data. BetterPrefs is not a singleton, and, in fact, does not derive from MonoBehaviour at all. It is instead a static class that you can access from anywhere, without even needing any `using`s for it.
 
 ```csharp
 BetterPrefs.Load("/saves/example.save"); // Loads the save data from "/saves/example.save", or, if it doesn't exist, loads a blank save and remembers to save at that location
