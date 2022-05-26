@@ -388,7 +388,7 @@ public static class BetterPrefs
         }
         */
 
-        string[,] dataArray = new string[data.Count + 1, 3];
+        string[,] dataArray = new string[data.Count, 3];
 
         if (data.Count == 0)
         {
@@ -466,9 +466,9 @@ public static class BetterPrefs
 
         double totalSecs = (DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalSeconds;
 
-        dataArray[data.Count, 0] = "float";
-        dataArray[data.Count, 1] = "date";
-        dataArray[data.Count, 2] = totalSecs.ToString();
+        dataArray[data.Count - 1, 0] = "float";
+        dataArray[data.Count - 1, 1] = "date";
+        dataArray[data.Count - 1, 2] = totalSecs.ToString();
 
         data["date"] = (float)totalSecs; // Set the date key to the current time now that we know at what time the save was made
 
