@@ -1,3 +1,5 @@
+# HEY THERE! please do not use this until version 3.0.0 releases. (see [Migrate away from BinaryFormatter](https://github.com/Carroted/BetterPrefs/issues/9) for more details)
+
 # BetterPrefs
 
 BetterPrefs is both a replacement for Unity's PlayerPrefs with features that PlayerPrefs is lacking, such as support for multiple saves, save import/export and even more data types, such as booleans, Vector2s and Vector3s, but is designed to, while keeping the simplicity of PlayerPrefs, be perfect for game data.
