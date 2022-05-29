@@ -132,4 +132,6 @@ Saves are serialized using `System.IO.BinaryWriter`.
 
 ## About
 
-BetterPrefs was released on May 21, 2022 by [Alex_Sour](https://github.com/Alex-Sour) under the [MIT license](https://opensource.org/licenses/MIT).
+BetterPrefs was made to fix many of PlayerPrefs' limitations, and to make a save/load system that can be used for more than just player preferences.
+
+It was released on May 21, 2022 by [Alex_Sour](https://github.com/Alex-Sour) under the [MIT license](https://opensource.org/licenses/MIT), as it will stay forever.
