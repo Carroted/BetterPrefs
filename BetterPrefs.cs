@@ -1,7 +1,7 @@
 /*
 BetterPrefs is a replacement for Unity's PlayerPrefs that aims to add features that PlayerPrefs is lacking, such as support for multiple saves, save import/export and even more data types, such as booleans, Vector2s and Vector3s.
 
-Version: 2.2.2
+Version: 3.0.0
 
 https://github.com/Carroted/BetterPrefs
 
@@ -15,7 +15,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System;
-using System.Runtime.Serialization.Formatters.Binary;
 
 public static class BetterPrefs
 {
@@ -25,6 +24,39 @@ public static class BetterPrefs
 
     static Dictionary<string, object> data; // The data that will be saved. This should only ever be accessed through the Get and Set functions.
     public static string currentSave = null; // The full path and name of the save file that is currently loaded, null if no save is loaded.
+
+    static void Write2DArray(string[,] array, BinaryWriter writer) // Used by Save
+    {
+        writer.Write(array.GetLength(0));
+        writer.Write(array.GetLength(1));
+        for (int i = 0; i < array.GetLength(0); i++)
+        {
+            for (int j = 0; j < array.GetLength(1); j++)
+            {
+                writer.Write(array[i, j]);
+            }
+        }
+
+        // Close the writer
+        writer.Close();
+    }
+
+    static string[,] Read2DArray(BinaryReader reader) // Used by Load
+    {
+        int x = reader.ReadInt32();
+        int y = reader.ReadInt32();
+        string[,] array = new string[x, y];
+        for (int i = 0; i < x; i++)
+        {
+            for (int j = 0; j < y; j++)
+            {
+                array[i, j] = reader.ReadString();
+            }
+        }
+        // Close the reader
+        reader.Close();
+        return array;
+    }
 
     public static void SetBool(string key, bool value)
     {
@@ -109,15 +141,7 @@ public static class BetterPrefs
         }
         else
         {
-            if (fallback == null)
-            {
-                Debug.LogError("BetterPrefs: Key " + key + " does not exist. You should always use BetterPrefs.HasKey to check if a key exists before trying to access it.");
-                return false;
-            }
-            else
-            {
-                return fallback;
-            }
+            return fallback;
         }
     }
 
@@ -135,15 +159,7 @@ public static class BetterPrefs
         }
         else
         {
-            if (fallback == null)
-            {
-                Debug.LogError("BetterPrefs: Key " + key + " does not exist. You should always use BetterPrefs.HasKey to check if a key exists before trying to access it.");
-                return -1;
-            }
-            else
-            {
-                return fallback;
-            }
+            return fallback;
         }
     }
 
@@ -161,15 +177,7 @@ public static class BetterPrefs
         }
         else
         {
-            if (fallback == null)
-            {
-                Debug.LogError("BetterPrefs: Key " + key + " does not exist. You should always use BetterPrefs.HasKey to check if a key exists before trying to access it.");
-                return -1;
-            }
-            else
-            {
-                return fallback;
-            }
+            return fallback;
         }
     }
 
@@ -187,15 +195,7 @@ public static class BetterPrefs
         }
         else
         {
-            if (fallback == null)
-            {
-                Debug.LogError("BetterPrefs: Key " + key + " does not exist. You should always use BetterPrefs.HasKey to check if a key exists before trying to access it.");
-                return "";
-            }
-            else
-            {
-                return fallback;
-            }
+            return fallback;
         }
     }
 
@@ -213,15 +213,7 @@ public static class BetterPrefs
         }
         else
         {
-            if (fallback == null)
-            {
-                Debug.LogError("BetterPrefs: Key " + key + " does not exist. You should always use BetterPrefs.HasKey to check if a key exists before trying to access it.");
-                return Vector2.zero;
-            }
-            else
-            {
-                return fallback;
-            }
+            return fallback;
         }
     }
 
@@ -239,15 +231,7 @@ public static class BetterPrefs
         }
         else
         {
-            if (fallback == null)
-            {
-                Debug.LogError("BetterPrefs: Key " + key + " does not exist. You should always use BetterPrefs.HasKey to check if a key exists before trying to access it.");
-                return Vector3.zero;
-            }
-            else
-            {
-                return fallback;
-            }
+            return fallback;
         }
     }
 
@@ -392,7 +376,7 @@ public static class BetterPrefs
 
         // Add the current date and time to the array (UNIX time)
 
-        double totalSecs = (DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalSeconds;
+        double totalSecs = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
 
         data["date"] = (float)totalSecs; // Set the date key to the current time now that we know at what time the save was made
 
@@ -418,7 +402,7 @@ public static class BetterPrefs
         }
 
         int i = 0; // Using a foreach loop with an index is actually simpler than using a for loop for this very specific case.
-        int dateIndex = -1; // We use this to store the index of the date entry in the data array.
+
         foreach (KeyValuePair<string, object> pair in data)
         {
             // Add the stuff to the array
@@ -489,13 +473,16 @@ public static class BetterPrefs
 
         Directory.CreateDirectory(Path.GetDirectoryName(savePath));
 
-        // Use System.Runtime.Serialization.Formatters.Binary.BinaryFormatter to serialize the data
-
-        BinaryFormatter bf = new BinaryFormatter();
+        // Use Write2DArray we defined earlier to write the data to the file
 
         FileStream file = File.Create(savePath);
 
-        bf.Serialize(file, dataArray);
+        // Write2DArray(string[,], BinaryWriter)
+
+        Write2DArray(dataArray, new BinaryWriter(file));
+
+
+
 
         file.Close();
 
@@ -516,13 +503,13 @@ public static class BetterPrefs
 
         if (File.Exists(savePath)) // If the file doesn't exist, we know that file path is where the current save should be, so we store that and when Save is called, saves will be put there by default.
         {
-            // Use System.Runtime.Serialization.Formatters.Binary.BinaryFormatter to deserialize the data
-
-            BinaryFormatter bf = new BinaryFormatter();
+            // Use Read2DArray we defined earlier to read the data from the file
 
             FileStream file = File.Open(savePath, FileMode.Open);
 
-            string[,] dataArray = (string[,])bf.Deserialize(file);
+            // Read2DArray(BinaryReader)
+
+            string[,] dataArray = Read2DArray(new BinaryReader(file));
 
             file.Close();
 
@@ -869,13 +856,13 @@ public static class BetterPrefs
                 return DateTime.Now;
             }
 
-            // Get the date from the save file
-
-            BinaryFormatter bf = new BinaryFormatter();
+            // Get the date from the save file using Read2DArray
 
             FileStream file = File.Open(savePath, FileMode.Open);
 
-            string[,] dataArray = (string[,])bf.Deserialize(file);
+            BinaryReader reader = new BinaryReader(file);
+
+            string[,] dataArray = Read2DArray(reader);
 
             file.Close();
 
