@@ -124,7 +124,7 @@ There is also a `Dictionary<string,object>` named **data** in BetterPrefs, but i
 
 ## Serialization
 
-Saves are serialized using `System.IO.BinaryWriter`.
+Saves are serialized using `System.IO.BinaryWriter` using [BetterPrefs.cs](https://github.com/Carroted/BetterPrefs/blob/master/BetterPrefs.cs)'s `Write2DArray` (credit to GitHub Copilot for that)
 
 ## Known Limitations
 
