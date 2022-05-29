@@ -1,4 +1,4 @@
-# HEY THERE! please do not use this until version 3.0.0 releases. (see [Migrate away from BinaryFormatter](https://github.com/Carroted/BetterPrefs/issues/9) for more details)
+# HEY THERE! please do not use this until version 3.0.0 releases later today. (see [Migrate away from BinaryFormatter](https://github.com/Carroted/BetterPrefs/issues/9) for more details)
 
 # BetterPrefs
 
