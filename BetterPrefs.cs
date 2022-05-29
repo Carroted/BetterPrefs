@@ -26,7 +26,7 @@ public static class BetterPrefs
     static Dictionary<string, object> data; // The data that will be saved. This should only ever be accessed through the Get and Set functions.
     public static string currentSave = null; // The full path and name of the save file that is currently loaded, null if no save is loaded.
 
-    public static void SetBool(string key, bool value)
+    public static void SetBoolean(string key, bool value)
     {
         if (data == null)
         {
@@ -36,7 +36,7 @@ public static class BetterPrefs
         data[key] = value;
     }
 
-    public static void SetInt(string key, int value)
+    public static void SetInt32(string key, int value)
     {
         if (data == null)
         {
@@ -47,7 +47,7 @@ public static class BetterPrefs
         data[key] = value;
     }
 
-    public static void SetFloat(string key, float value)
+    public static void SetSingle(string key, float value)
     {
         if (data == null)
         {
@@ -95,7 +95,7 @@ public static class BetterPrefs
         data[key] = value;
     }
 
-    public static bool GetBool(string key, bool fallback)
+    public static bool GetBoolean(string key, bool fallback)
     {
         if (data == null)
         {
@@ -121,7 +121,7 @@ public static class BetterPrefs
         }
     }
 
-    public static int GetInt(string key, int fallback)
+    public static int GetInt32(string key, int fallback)
     {
         if (data == null)
         {
@@ -147,7 +147,7 @@ public static class BetterPrefs
         }
     }
 
-    public static float GetFloat(string key, float fallback)
+    public static float GetSingle(string key, float fallback)
     {
         if (data == null)
         {
@@ -253,7 +253,7 @@ public static class BetterPrefs
 
     // Get methods without fallback
 
-    public static bool GetBool(string key)
+    public static bool GetBoolean(string key)
     {
         if (data == null)
         {
@@ -272,7 +272,7 @@ public static class BetterPrefs
         }
     }
 
-    public static int GetInt(string key)
+    public static int GetInt32(string key)
     {
         if (data == null)
         {
@@ -291,7 +291,7 @@ public static class BetterPrefs
         }
     }
 
-    public static float GetFloat(string key)
+    public static float GetSingle(string key)
     {
         if (data == null)
         {
@@ -852,7 +852,7 @@ public static class BetterPrefs
         {
             if (HasKey("date"))
             {
-                DateTimeOffset dateTimeOffset = DateTimeOffset.FromUnixTimeSeconds((int)GetFloat("date"));
+                DateTimeOffset dateTimeOffset = DateTimeOffset.FromUnixTimeSeconds((int)GetSingle("date"));
 
                 return dateTimeOffset.LocalDateTime;
             }
