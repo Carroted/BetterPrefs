@@ -109,15 +109,7 @@ public static class BetterPrefs
         }
         else
         {
-            if (fallback == null)
-            {
-                Debug.LogError("BetterPrefs: Key " + key + " does not exist. You should always use BetterPrefs.HasKey to check if a key exists before trying to access it.");
-                return false;
-            }
-            else
-            {
-                return fallback;
-            }
+            return fallback;
         }
     }
 
@@ -135,15 +127,7 @@ public static class BetterPrefs
         }
         else
         {
-            if (fallback == null)
-            {
-                Debug.LogError("BetterPrefs: Key " + key + " does not exist. You should always use BetterPrefs.HasKey to check if a key exists before trying to access it.");
-                return -1;
-            }
-            else
-            {
-                return fallback;
-            }
+            return fallback;
         }
     }
 
@@ -161,15 +145,7 @@ public static class BetterPrefs
         }
         else
         {
-            if (fallback == null)
-            {
-                Debug.LogError("BetterPrefs: Key " + key + " does not exist. You should always use BetterPrefs.HasKey to check if a key exists before trying to access it.");
-                return -1;
-            }
-            else
-            {
-                return fallback;
-            }
+            return fallback;
         }
     }
 
@@ -213,15 +189,7 @@ public static class BetterPrefs
         }
         else
         {
-            if (fallback == null)
-            {
-                Debug.LogError("BetterPrefs: Key " + key + " does not exist. You should always use BetterPrefs.HasKey to check if a key exists before trying to access it.");
-                return Vector2.zero;
-            }
-            else
-            {
-                return fallback;
-            }
+            return fallback;
         }
     }
 
@@ -239,15 +207,7 @@ public static class BetterPrefs
         }
         else
         {
-            if (fallback == null)
-            {
-                Debug.LogError("BetterPrefs: Key " + key + " does not exist. You should always use BetterPrefs.HasKey to check if a key exists before trying to access it.");
-                return Vector3.zero;
-            }
-            else
-            {
-                return fallback;
-            }
+            return fallback;
         }
     }
 
