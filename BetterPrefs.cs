@@ -1,6 +1,8 @@
 /*
 BetterPrefs is a replacement for Unity's PlayerPrefs that aims to add features that PlayerPrefs is lacking, such as support for multiple saves, save import/export and even more data types, such as booleans, Vector2s and Vector3s.
 
+Version: 2.2.2
+
 https://github.com/Carroted/BetterPrefs
 
 Author: Alex_Sour
@@ -388,7 +390,19 @@ public static class BetterPrefs
         }
         */
 
+        // Add the current date and time to the array (UNIX time)
+
+        double totalSecs = (DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalSeconds;
+
+        data["date"] = (float)totalSecs; // Set the date key to the current time now that we know at what time the save was made
+
         string[,] dataArray = new string[data.Count, 3];
+
+
+
+
+
+
 
         if (data.Count == 0)
         {
@@ -404,6 +418,7 @@ public static class BetterPrefs
         }
 
         int i = 0; // Using a foreach loop with an index is actually simpler than using a for loop for this very specific case.
+        int dateIndex = -1; // We use this to store the index of the date entry in the data array.
         foreach (KeyValuePair<string, object> pair in data)
         {
             // Add the stuff to the array
@@ -430,7 +445,8 @@ public static class BetterPrefs
                 }
                 else
                 {
-                    continue; // Ignore the date key since we add it automatically after this foreach loop
+                    objectType = "float";
+                    valueFormatted = totalSecs.ToString(); // override the date value with the current time
                 }
             }
             else if (pair.Value is string)
@@ -454,6 +470,11 @@ public static class BetterPrefs
 
                 valueFormatted = value.x.ToString() + "," + value.y.ToString() + "," + value.z.ToString();
             }
+            else
+            {
+                Debug.LogError("BetterPrefs: Unsupported type " + pair.Value.GetType() + " for key " + pair.Key);
+                continue;
+            }
 
             dataArray[i, 0] = objectType;
             dataArray[i, 1] = pair.Key;
@@ -461,16 +482,6 @@ public static class BetterPrefs
 
             i++;
         }
-
-        // Add the current date and time to the array (UNIX time)
-
-        double totalSecs = (DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalSeconds;
-
-        dataArray[data.Count - 1, 0] = "float";
-        dataArray[data.Count - 1, 1] = "date";
-        dataArray[data.Count - 1, 2] = totalSecs.ToString();
-
-        data["date"] = (float)totalSecs; // Set the date key to the current time now that we know at what time the save was made
 
         // Save the data to the file
 
